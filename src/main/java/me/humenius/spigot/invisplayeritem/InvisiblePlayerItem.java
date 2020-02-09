@@ -49,12 +49,10 @@ public class InvisiblePlayerItem implements Listener {
             boolean isUsing = metadataList.get(0).asBoolean();
             player.sendMessage("Spieler sind jetzt " + (isUsing ? "sichtbar" : "unsichtbar"));
 
-            System.out.println(isUsing);
             hidePlayer(player, !isUsing);
             player.setMetadata(METADATA_KEY, new FixedMetadataValue(pluginRef, !isUsing));
             player.getInventory().setItem(0, getItemStack(!isUsing));
         } else {
-            System.out.println(">> metaDataList == null");
             player.sendMessage("Spieler sind jetzt unsichtbar");
             hidePlayer(player, true);
             player.setMetadata(METADATA_KEY, new FixedMetadataValue(pluginRef, true));
@@ -76,7 +74,6 @@ public class InvisiblePlayerItem implements Listener {
     private void hidePlayer(Player player, boolean hide) {
         if (hide) {
             for (Player p : Bukkit.getOnlinePlayers()) {
-                pluginRef.getLogger().info("hidePlayer >> " + p + " -> hide(" + hide + ")");
                 player.hidePlayer(p);
                 p.hidePlayer(player);
             }
@@ -88,7 +85,6 @@ public class InvisiblePlayerItem implements Listener {
                         continue;
                 }
 
-                pluginRef.getLogger().info("hidePlayer >> " + p + " -> hide(" + hide + ")");
                 player.showPlayer(p);
                 p.showPlayer(player);
             }
